@@ -49,4 +49,14 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", user=" + user +
+                ", advertisement=" + advertisement +
+                ", text='" + text + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

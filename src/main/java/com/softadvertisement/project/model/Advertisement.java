@@ -68,5 +68,14 @@ public class Advertisement {
         this.user = user;
     }
 
-
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

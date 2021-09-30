@@ -13,11 +13,11 @@ public class Main {
     public static void main(String[] args) {
 
         ///////////////////////////////////////////////////////////////////// All users data
-        try {
-            System.out.println(UserActions.getAllUsers());
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            System.out.println(UserActions.getAllUsers());
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace();
+//        }
         /////////
 
         ///////////////////////////////////////////////////////////////////// Get back user id 1
@@ -70,7 +70,7 @@ public class Main {
 //        }
 
         try {
-            AdvertisementActions.getAdvertId(1);
+            System.out.println(AdvertisementActions.getAdvertId(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }

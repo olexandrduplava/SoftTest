@@ -37,13 +37,13 @@ public class AdvertisementActions {
 
     public static List<Advertisement> getAllAdvert() throws SQLException, IOException {
         List<Advertisement> advertList = new ArrayList<>();
-        try (Connection connection = DBConnecting.getConnection(); PreparedStatement statement = connection.prepareStatement("SELECT * FROM users")) {
+        try (Connection connection = DBConnecting.getConnection(); PreparedStatement statement = connection.prepareStatement("SELECT advertisement.*,name FROM advertisement join users on advertisement.user_id = users.id")) {
             final ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Advertisement advertisement = new Advertisement();
                 advertisement.setId(resultSet.getLong(1));
                 advertisement.setTitle(resultSet.getString(2));
-                //advertisement.setCreatedAt(resultSet.getDate(3));
+                advertisement.setCreatedAt(resultSet.getTimestamp(3).toLocalDateTime().toLocalDate());
                 advertisement.setDescription(resultSet.getString(4));
                // advertisement.setUser(resultSet.getObject(5));
                 advertList.add(advertisement);

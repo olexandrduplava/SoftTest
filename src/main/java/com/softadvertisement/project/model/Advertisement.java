@@ -16,16 +16,19 @@ public class Advertisement {
         this.title = title;
         this.description = description;
     }
+
     public Advertisement(long id, String title,String description){
         this.id = id;
         this.title = title;
         this.description = description;
     }
-    public Advertisement(long id, String title,LocalDate createdAt, String description){
-        this.id = id;
+
+    public Advertisement(String title,String description, LocalDate createdAt, User user){
         this.title = title;
-        this.createdAt = createdAt;
         this.description = description;
+        this.createdAt = createdAt;
+        this.user = user;
+
     }
 
     public long getId() {

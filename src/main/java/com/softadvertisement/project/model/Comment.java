@@ -11,6 +11,17 @@ public class Comment {
 
     public Comment(){}
 
+    public Comment(String text){
+        this.text = text;
+    }
+
+    public Comment(User user, Advertisement advertisement, String text, LocalDate createdAt) {
+        this.user = user;
+        this.advertisement = advertisement;
+        this.text = text;
+        this.createdAt = createdAt;
+    }
+
     public Comment(long id, User user, Advertisement advertisement, String text, LocalDate createdAt) {
         this.id = id;
         this.user = user;

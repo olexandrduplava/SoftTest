@@ -4,6 +4,7 @@ import com.softadvertisement.project.actions.AdvertisementActions;
 import com.softadvertisement.project.actions.CommentActions;
 import com.softadvertisement.project.actions.UserActions;
 import com.softadvertisement.project.model.Advertisement;
+import com.softadvertisement.project.model.Comment;
 import com.softadvertisement.project.model.User;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args){
+
 
         ///////////////////////////////////////////////////////////////////// All users data
 //        try {
@@ -137,7 +139,7 @@ public class Main {
 //        }
 
 
-        ///////////////////////////////////////////////////////////////////// getCommIdByUser ------
+        ///////////////////////////////////////////////////////////////////// getCommIdByUser ++++++
 /*Так само виводить правильну кількість но не самі коментраії*/
 //        try {
 //            System.out.println(CommentActions.getCommByUserID(1));
@@ -147,6 +149,63 @@ public class Main {
 
         ///////////////////////////////////////////////////////////////////// getAllCom ++++++
 
+//        try {
+//            System.out.println(CommentActions.getAllComm());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+        ///////////////////////////////////////////////////////////////// Add Comm ++++++++
+//        User user = new User();
+//        try {
+//            user = UserActions.getUserById(1);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        Advertisement advertisement = new Advertisement();
+//        try {
+//            advertisement = AdvertisementActions.getAdvertId(1);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        Comment comment = new Comment(user,advertisement,"TEST TEXT COMMENT",LocalDate.now());
+//        try {
+//            CommentActions.addComment(comment);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("/////////////////////////////////////////////////");
+//
+//        try {
+//            System.out.println(CommentActions.getAllComm());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+        ///////////////////////////////////////////////////////////////////// Update Comm +++++
+
+//        Comment comment = new Comment("UPDATED COMMENT");
+//        try {
+//            System.out.println(CommentActions.updateComment(6,comment));
+//        } catch (SQLException | IOException | NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            System.out.println(CommentActions.getAllComm());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+        /////////////////////////////////////////////////////////////////// Delete Comm +++++
+
+//        try {
+//            System.out.println(CommentActions.deleteComment(6));
+//        } catch (IOException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//
 //        try {
 //            System.out.println(CommentActions.getAllComm());
 //        } catch (SQLException e) {

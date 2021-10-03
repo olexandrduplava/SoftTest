@@ -5,10 +5,10 @@ import com.softadvertisement.project.model.Advertisement;
 import com.softadvertisement.project.model.Comment;
 import com.softadvertisement.project.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,6 @@ public class CommentActions {
                 advertisement.setId(resultSet.getLong("id"));
                 advertisement.setTitle(resultSet.getString("title"));
                 comment.setAdvertisement(advertisement);
-
             }
         }
         return comment;
@@ -40,8 +39,6 @@ public class CommentActions {
 
     public static List<Comment> getCommByUserID(long idUser) throws SQLException {
         List<Comment> commentList = new ArrayList<>();
-        Comment comment = new Comment();
-        Advertisement advertisement = new Advertisement();
         User user = new User();
         try (Connection connection = DBConnecting.getConnection();
              PreparedStatement statement = connection.prepareStatement(
@@ -49,6 +46,8 @@ public class CommentActions {
             statement.setLong(1,idUser);
             final ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
+                Advertisement advertisement = new Advertisement();
+                Comment comment = new Comment();
                 comment.setId(resultSet.getLong(1));
                 comment.setCreatedAt(resultSet.getTimestamp(2).toLocalDateTime().toLocalDate());
                 comment.setText(resultSet.getString(3));
@@ -63,7 +62,6 @@ public class CommentActions {
         }
         return commentList;
     }
-//
 
     public static List<Comment> getAllComm() throws SQLException {
         List<Comment> commentsList = new ArrayList<>();
@@ -86,6 +84,44 @@ public class CommentActions {
             }
         }
         return commentsList;
+    }
+
+    public static boolean addComment(@org.jetbrains.annotations.NotNull Comment comment) throws SQLException{
+        User user = new User();
+        try (Connection connection = DBConnecting.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO comments (created_at ,text ,user_id, adv_id ) VALUES (?,?,?,?);")){
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setString(2, comment.getText());
+            preparedStatement.setLong(3, comment.getUser().getId());
+            preparedStatement.setLong(4, comment.getAdvertisement().getId());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println("SQL addAdvertisement");
+            return false;
+        }
+    }
+
+    public static boolean updateComment(long id, Comment comment) throws IOException, SQLException, NoSuchAlgorithmException {
+        try (Connection connection = DBConnecting.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE comments SET text  = ?  WHERE id = ?")) {
+            preparedStatement.setString(1, comment.getText());
+            preparedStatement.setLong(2, id);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public static boolean deleteComment(long idDelete) throws IOException, SQLException {
+        Connection connection = DBConnecting.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("delete from comments WHERE Id=?")) {
+            preparedStatement.setLong(1,idDelete);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
 }

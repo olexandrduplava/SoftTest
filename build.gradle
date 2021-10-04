@@ -16,6 +16,11 @@ dependencies {
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.24'
     implementation 'com.google.code.gson:gson:2.8.8'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+
+
 }
 
 test {

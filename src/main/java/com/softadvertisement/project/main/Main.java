@@ -1,20 +1,32 @@
 package com.softadvertisement.project.main;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.softadvertisement.project.actions.AdvertisementActions;
 import com.softadvertisement.project.actions.CommentActions;
 import com.softadvertisement.project.actions.UserActions;
 import com.softadvertisement.project.model.Advertisement;
 import com.softadvertisement.project.model.Comment;
 import com.softadvertisement.project.model.User;
+import com.softadvertisement.project.serialize.DeserializeObject;
+import com.softadvertisement.project.serialize.SerializeObject;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
 
         ///////////////////////////////////////////////////////////////////// All users data
@@ -74,22 +86,22 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        ///////////////////////////////////////////////////////////////////// Get Adverd by Id +++++++++
+        ///////////////////////////////////////////////////////////////////// Get Advert by Id +++++++++
 //        try {
 //            System.out.println(AdvertisementActions.getAdvertId(1));
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-       // System.out.println(AdvertisementActions.getAdvertId(1l));
+        // System.out.println(AdvertisementActions.getAdvertId(1l));
 
-        ///////////////////////////////////////////////////////////////////// Get Adverds by User id +++++++
+        ///////////////////////////////////////////////////////////////////// Get Adverts by User id +++++++
 //        try {
 //            System.out.println(AdvertisementActions.getAdvertsByUserID(3));
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
 
-        ///////////////////////////////////////////////////////////////////// Get All adverds ++++++++
+        ///////////////////////////////////////////////////////////////////// Get All adverts ++++++++
 //        try {
 //            System.out.println(AdvertisementActions.getAllAdvert());
 //        } catch (SQLException e) {
@@ -104,7 +116,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //        System.out.println("USER: " + user);
-//        Advertisement advertisement = new Advertisement("TITLE","DESCRIBTION", LocalDate.now(),user);
+//        Advertisement advertisement = new Advertisement("TITLE","DESCRIPTION", LocalDate.now(),user);
 //
 //        try {
 //            AdvertisementActions.addAdvertisement(advertisement);
@@ -140,7 +152,7 @@ public class Main {
 
 
         ///////////////////////////////////////////////////////////////////// getCommIdByUser ++++++
-/*Так само виводить правильну кількість но не самі коментраії*/
+        /*Так само виводить правильну кількість но не самі коментраії*/
 //        try {
 //            System.out.println(CommentActions.getCommByUserID(1));
 //        } catch (SQLException e) {
@@ -211,6 +223,107 @@ public class Main {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+
+        /////////////////////////////////////////////////////////////////// Serialize +++++++
+
+//        List<User> userList = new ArrayList<>();
+//
+//        try {
+//            userList = (UserActions.getAllUsers());
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(userList);
+//        System.out.println("//////////////////////////////////");
+//
+//        String text = "";
+//        try {
+//            text = SerializeObject.SerializeListUsers(userList);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        SerializeObject.JsonToFile(text);
+////
+//        User user = new User("LOGIN", "PASSWORD");
+//        GsonBuilder builder = new GsonBuilder();
+//        Gson gson = builder.create();
+//        System.out.println((gson.toJson(user)));
+
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = "";
+//        try {
+//            json = mapper.writeValueAsString(user);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(json);
+
+//        String jsonlist = null;
+//        try {
+//            jsonlist = mapper.writeValueAsString(userList);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(jsonlist);
+
+        ///////////////////////////Serialize cherez class
+
+//        User user = new User("LOGIN", "PASSWORD");
+//        Advertisement advertisement = new Advertisement("test","1234");
+//        String test="";
+//
+//        try {
+//           test = SerializeObject.SerializeUser(user);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(test);
+        ///////////////////////////////////DESERIALIZE cherez file
+
+//        User user = new User();
+//
+//        List<User> testList = new ArrayList<>();
+//
+//
+//        File file = new File("C:/Users/Alexandr/IdeaProjects/SoftGradle/src/Json/json.txt");
+//        String test = DeserializeObject.FileToJson(file);
+//        System.out.println("File to Json: " + test);
+//        try {
+//            testList = DeserializeObject.DeserializeListUser(test);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(testList);
+//
+//        System.out.println("User: " + user);
+        ///////////////////////////////////////////////////////Prosto deserialize
+//        User user2 = new User();
+//        try {
+//            user2 = DeserializeObject.DeserializeUser(test);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("user 2: " + user2);
+
+
+        User user = new User();
+        File filetest = new File("C:/Users/Alexandr/IdeaProjects/SoftGradle/src/Json/jsonObject.json");
+        try {
+            user = DeserializeObject.FileToUser(filetest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(user);
+
+
+        ///////////////////////////////////////////////////////////////// PROBEM ZAPIS V FILE +++++
+//        SerializeObject.JsonToFile(test);
+
 
         System.out.println("Hello");
     }
